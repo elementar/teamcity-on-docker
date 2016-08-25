@@ -14,13 +14,13 @@ RUN apt-get update \
 RUN gem install rake
 
 # instala o docker
-ENV DOCKER_VERSION="latest"
+ENV DOCKER_VERSION="1.12.1"
 RUN curl -sL "https://get.docker.com/builds/Linux/`uname -m`/docker-${DOCKER_VERSION}.tgz" \
     | tar xvz --strip-components 1 -C /usr/local/bin/ \
  && docker --version
 
 # instala o docker-compose
-ENV DOCKER_COMPOSE_VERSION="1.7.1"
+ENV DOCKER_COMPOSE_VERSION="1.8.0"
 RUN curl -sL "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m`" \
     > /usr/local/bin/docker-compose \
  && chmod +x /usr/local/bin/docker-compose \

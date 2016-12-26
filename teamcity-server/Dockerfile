@@ -7,7 +7,7 @@ VOLUME ["/data"]
 ENV TEAMCITY_DATA_PATH /data/teamcity
 
 # Download and install TeamCity to /opt
-RUN curl --fail -sL "https://download.jetbrains.com/teamcity/TeamCity-10.0.3.tar.gz" | tar zx -C /opt
+RUN curl --fail -sL "https://download.jetbrains.com/teamcity/TeamCity-10.0.4.tar.gz" | tar zx -C /opt
 
 EXPOSE 8111
 CMD ["/opt/TeamCity/bin/teamcity-server.sh", "run"]

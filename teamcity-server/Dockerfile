@@ -1,4 +1,4 @@
-FROM java:8-jdk
+FROM jetbrains/teamcity-base
 
 MAINTAINER Elementar Sistemas <contato@elementarsistemas.com.br>
 
@@ -7,7 +7,7 @@ VOLUME ["/data"]
 ENV TEAMCITY_DATA_PATH /data/teamcity
 
 # Download and install TeamCity to /opt
-RUN curl --fail -sL "https://download.jetbrains.com/teamcity/TeamCity-10.0.5.tar.gz" | tar zx -C /opt
+RUN curl --fail -sL "https://download.jetbrains.com/teamcity/TeamCity-2017.1.tar.gz" | tar zx -C /opt
 
 EXPOSE 8111
 CMD ["/opt/TeamCity/bin/teamcity-server.sh", "run"]

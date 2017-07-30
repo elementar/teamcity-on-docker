@@ -41,23 +41,28 @@ function wait_for_idle {
   echo -n "$@" " "
   while backup_is_running; do
     sleep 10
-    echo "."
+    echo -n "."
   done
   echo "OK!"
 }
 
-[ ! backup_is_running ] || wait_for_idle "Waiting for backup service to be idle"
+[ ! backup_is_running ] || wait_for_idle "Waiting for backup service to be idle..."
 
 # starts the backup
+echo "Asking TeamCity to start the backup."
+echo -n "Response: "
 tc_api 'app/rest/server/backup' -X POST -G \
         -d 'includeConfigs=true' \
         -d 'includeDatabase=true' \
         -d 'includeBuildLogs=true' \
         -d 'fileName=TeamCity_Auto_Backup'
 
-wait_for_idle "Awaiting backup conclusion"
+echo
+echo
+wait_for_idle "Waiting for the backup to finish..."
 
 # uploads backups to S3
+echo "Syncing backups to S3..."
 aws s3 sync "$LOCAL_BACKUP_DIR" "$S3_BACKUP_LOCATION"
 
 echo "Done!"

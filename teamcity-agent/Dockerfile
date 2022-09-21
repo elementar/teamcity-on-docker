@@ -17,6 +17,9 @@ RUN gem install --no-doc rake
 # habilita uso de "sudo" pelo usuário do buildagent
 RUN echo "%buildagent ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/buildagent
 
+# instala a última versão do docker-compose
+RUN curl -SL https://github.com/docker/compose/releases/download/v2.11.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+
 # devolve o usuário padrão
 USER buildagent
 
